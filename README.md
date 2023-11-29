@@ -1,46 +1,41 @@
-# Getting Started with Create React App
+# Todo List App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was create with [syahakato](https://syahakato.site).
 
-## Available Scripts
 
-In the project directory, you can run:
+### Description
+Projects yang saja buat ini menggunakan [React JS](https://reactjs.org) dan [Typescript](https://www.typescriptlang.org/) dengan CSS Framework andalan yaitu [Tailwind CSS](https://tailwindcss.com). Dibuat tanpa database, semua state di simpan di [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage), alasan memilih menyimpan di [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) adalah karena ini aplikasi ringan dan mudah untuk di buat jadi saya lakukan semua di client. 
 
-### `npm start`
+## Penjelasan Code at [Line 1 - 4](https://github.com/syahrilaa/Todo-List/blob/e7037d63fd4bf35544b484626d9556bd946d0ddb/src/App.tsx#L1-L4)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Import Components and React
+```ts
+import React from 'react'
+import {TodosCard} from "./components/todoCard"
+import {TodoInput} from "./components/input";
+import {TopBar} from "./components/topbar";
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Hanya ada 3 import components di sini yaitu [TodosCard](https://github.com/syahrilaa/Todo-List/blob/main/src/components/todoCard.tsx), [TodoInput](https://github.com/syahrilaa/Todo-List/blob/main/src/components/input.tsx) dan [TopBar](https://github.com/syahrilaa/Todo-List/blob/main/src/components/topbar.tsx)
+yang dipakai di satu Page Components itu [App](https://github.com/syahrilaa/Todo-List/blob/main/src/App.tsx)
 
-### `npm test`
+### Interface Todos at [Line 6 - 11](https://github.com/syahrilaa/Todo-List/blob/e7037d63fd4bf35544b484626d9556bd946d0ddb/src/App.tsx#L6-L11)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```ts
+interface TodosList {
+    id: number
+    todoName: string
+    timeDate: string
+    checked: boolean
+}
+```
 
-### `npm run build`
+Todos memiliki 4 data yaitu:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **id**: Object Types [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
+- **todoName**: Object Types [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+- **timeDate**: Object Types [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+- **checked**: Object Types [Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Ini penting di gunakan karena saya menggunakan Typescript, mungkin jika kalian menggunakan typescript tapi tidak membuat [Interface](https://www.typescriptlang.org/docs/handbook/typescript-tooling-in-5-minutes.html#interfaces) seperti contoh bisa jadi mendapatkan error seperti ini 
+![Error#Interface.png](git-source%2FError%23Interface.png)
