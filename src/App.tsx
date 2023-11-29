@@ -13,6 +13,7 @@ interface TodosList {
 const App = () => {
     const [todos, setListTodos] = React.useState<TodosList[]>([])
     const [todoName, setTodo] = React.useState('')
+    const [messages, setMessages] = React.useState('')
 
     const setToLocalStorage = (data: TodosList[]) => {
         localStorage.setItem('todos', JSON.stringify(data))
@@ -33,11 +34,16 @@ const App = () => {
     const onCreateTodos = (e: React.SyntheticEvent) => {
         e.preventDefault()
 
-        const createTodo: TodosList = { id: todos.length + 1, todoName: todoName, timeDate: new Date().toISOString(), checked: false }
-        const updateTodos = [...todos, createTodo]
-        setListTodos(updateTodos)
-        setToLocalStorage(updateTodos)
-        setTodo('')
+        if(todoName !== '') {
+            const createTodo: TodosList = { id: todos.length + 1, todoName: todoName, timeDate: new Date().toISOString(), checked: false }
+            const updateTodos = [...todos, createTodo]
+            setListTodos(updateTodos)
+            setToLocalStorage(updateTodos)
+            setTodo('')
+            setMessages('')
+        } else {
+            setMessages('Please enter the To-Do title.')
+        }
     }
 
     React.useEffect(() => {
@@ -79,6 +85,11 @@ const App = () => {
                 </header>
                 <div className={'w-full px-4 mt-11'}>
                     <TodoInput onCreateTodos={onCreateTodos} setTodos={(e) => setTodo(e.target.value)} todoName={todoName} />
+                    {messages ? (
+                        <div className={'ml-6 mt-1.5'}>
+                            <span className={'text-red-500 font-medium'}>{messages}</span>
+                        </div>
+                    ) : null}
                     {selectedIndex.length > 0 ? (
                         <TopBar selectedIndex={selectedIndex.length} selectedName={selectedName} remainingCount={remainingCount} onALlDelete={onALlDelete} />
                     ) : null}
